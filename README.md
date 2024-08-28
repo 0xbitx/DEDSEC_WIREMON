@@ -1,6 +1,6 @@
 
 <p align="center">
-<img src="https://cdn-icons-png.flaticon.com/512/550/550381.png", width="200", height="200">
+<img src="https://cdn-icons-png.flaticon.com/512/5606/5606489.png", width="200", height="200">
 </p>
 
 <h1 align="center"> WIREMON </h1>
