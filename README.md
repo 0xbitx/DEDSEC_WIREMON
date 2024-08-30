@@ -5,7 +5,7 @@
 
 <h1 align="center"> WIREMON </h1>
 <h4 align="center"> DEDSEC WIFI ATTACK FRAMEWORK </h4>
-<h4 align="center"> WIREMON is a Linux-based wifi attack framework tool.</h4>
+<h4 align="center"> WIREMON is a Linux-based Wi-Fi attack tool for networks you don't have access to.</h4>
 
 ### Features DESCRIPTION:
 
