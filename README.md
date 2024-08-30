@@ -24,9 +24,9 @@
 
    * Deploy Malware: Creates a malicious page that includes malware and presents a download button. When users interact with the page, they inadvertently download and execute the malware.
 
-   * Send Message to Wi-Fi Owner:  Sets up a captive portal page that displays a custom message to the Wi-Fi network owner. Useful for sending notifications or alerts to users who connect to the network.
+   * Send Message:  Sets up a captive portal page that displays a custom message to the Wi-Fi network owner. Useful for sending notifications or alerts to users who connect to the network.
 
-   * Rick Roll Wi-Fi Clients: Deploys a captive portal page that automatically plays the "Never Gonna Give You Up" music video in a loop. A fun prank to trick clients into viewing the famous Rickroll video.
+   * Rick Roll: Deploys a captive portal page that automatically plays the "Never Gonna Give You Up" music video in a loop. A fun prank to trick clients into viewing the famous Rickroll video.
 
 Each of these features leverages various network manipulation techniques and social engineering methods for different purposes, from security testing.
 
