@@ -33,8 +33,9 @@ Each of these features leverages various network manipulation techniques and soc
 ### INSTALLATION
     * git clone https://github.com/0xbitx/DEDSEC_WIREMON.git
     * cd DEDSEC_WIREMON
+    * sudo pip3 install tabulate psutil pyudev
     * chmod +x dedsec_wiremon
-    * ./dedsec_wiremon
+    * sudo ./dedsec_wiremon
 
 ### TESTED ON FOLLOWING
 * Kali Linux 
