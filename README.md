@@ -27,6 +27,8 @@
    * Send Message:  Sets up a captive portal page that displays a custom message to the Wi-Fi network owner. Useful for sending notifications or alerts to users who connect to the network.
 
    * Rick Roll: Deploys a captive portal page that automatically plays the "Never Gonna Give You Up" music video in a loop. A fun prank to trick clients into viewing the famous Rickroll video.
+   
+   * Map Distance: Maps the specific locations of Access Points (APs) in your area using collected signal strength data. This feature enables users to visualize the distribution of wireless networks, helping to locate APs in your area and assisting in site surveys, network planning, and identifying coverage gaps.
 
 Each of these features leverages various network manipulation techniques and social engineering methods for different purposes, from security testing.
 
